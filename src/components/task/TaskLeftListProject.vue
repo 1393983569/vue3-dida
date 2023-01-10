@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+import { NPopover } from 'naive-ui'
 import { reactive } from 'vue'
 import {
   SmartProjectNames,
@@ -47,6 +48,10 @@ const changeSelectedKeyAndActiveProject = (
   taskStore.changeCurrentActiveProject(projectName)
   projectSelectedStatusStore.changeSelectedKey([key])
 }
+
+function handleSmartProject() {
+
+}
 </script>
 
 <template>
@@ -59,16 +64,9 @@ const changeSelectedKeyAndActiveProject = (
       pr-2
       hover="bg-[#F3F3F5] dark:bg-[#2D2D30]"
       :class="
-        projectSelectedStatusStore.selectedKey[0] === item.key
-          ? selected
-          : ''
+        projectSelectedStatusStore.selectedKey[0] === item.key ? selected : ''
       "
-      @click="
-        changeSelectedKeyAndActiveProject(
-          item.title,
-          item.key,
-        )
-      "
+      @click="changeSelectedKeyAndActiveProject(item.title, item.key)"
     >
       <div flex>
         <Icon
@@ -79,14 +77,25 @@ const changeSelectedKeyAndActiveProject = (
         />
         <span class="ml-2">{{ item.title }}</span>
       </div>
-
-      <Icon
-        v-show="projectSelectedStatusStore.selectedKey[0] === item.key"
-        icon="material-symbols:more-horiz"
-        width="20"
-        class="color-[#9D9FA3]"
-        dark="color-white"
-      />
+      <NPopover
+        placement="right-start"
+        :show-arrow="false"
+        trigger="click"
+        style="border: 1px solid rgb(255 255 255 / 10%);width: 150px"
+      >
+        <template #trigger>
+          <Icon
+            v-show="projectSelectedStatusStore.selectedKey[0] === item.key"
+            icon="material-symbols:more-horiz"
+            width="20"
+            class="color-[#9D9FA3]"
+            dark="color-white"
+          />
+        </template>
+        <div class="cursor-pointer" @click="handleSmartProject">
+          隐藏
+        </div>
+      </NPopover>
     </li>
   </ul>
 </template>
