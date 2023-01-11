@@ -1,7 +1,7 @@
 import { fetchData } from './data'
 import { initProjects } from './project'
 import { initCompletedSmartProject } from './smartProject'
-export { SmartProjectNames } from './smartProject'
+export { SmartProjectNames, editHideSmartProject } from './smartProject'
 export { projects, findProjectByName } from './project'
 export {
   TaskState,

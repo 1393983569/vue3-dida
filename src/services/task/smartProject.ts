@@ -12,18 +12,22 @@ export enum SmartProjectNames {
 // 智能列表
 interface CompletedSmartProject extends Project {
   name: '已完成'
+  hide: false
 }
 
 interface TrashProject extends Project {
   name: '垃圾桶'
+  hide: false
 }
 
 interface FailedProject extends Project {
   name: '已放弃'
+  hide: false
 }
 
 interface AbstractProject extends Project {
   name: '摘要'
+  hide: false
 }
 
 export const trashProject = createTrashProject()
@@ -34,6 +38,7 @@ export const abstractProject = createAbstractProject()
 export function createCompletedSmartProject(): CompletedSmartProject {
   return {
     name: '已完成',
+    hide: false,
     tasks: [],
   }
 }
@@ -41,6 +46,7 @@ export function createCompletedSmartProject(): CompletedSmartProject {
 export function createTrashProject(): TrashProject {
   return {
     name: '垃圾桶',
+    hide: false,
     tasks: [],
   }
 }
@@ -48,6 +54,7 @@ export function createTrashProject(): TrashProject {
 export function createFailedSmartProject(): FailedProject {
   return {
     name: '已放弃',
+    hide: false,
     tasks: [],
   }
 }
@@ -55,6 +62,7 @@ export function createFailedSmartProject(): FailedProject {
 export function createAbstractProject(): AbstractProject {
   return {
     name: '摘要',
+    hide: false,
     tasks: [],
   }
 }
@@ -79,4 +87,8 @@ const smartProjects = {
 
 export function findSmartProjectByName(name: string) {
   return smartProjects[name as keyof typeof smartProjects]
+}
+
+export function editHideSmartProject(name: string, val: any) {
+  smartProjects[name as keyof typeof smartProjects].hide = val
 }
